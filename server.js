@@ -23,8 +23,12 @@ connection.connect(function(err) {
     console.log("Database Connected!");
 });
 
+app.get('/hello',(req,res) => {
+    res.send('Welcom to my API')
+})
+
 // Set Port server
-app.listen(8000,(err) => {
+app.listen(3000,(err) => {
     if(err) console.log(err);
-    console.log('Server run on port: 8000');
+    console.log('Server run on port: 3000');
 })
