@@ -27,6 +27,10 @@ app.get('/hello',(req,res) => {
     res.send('Welcom to my API')
 })
 
+app.get('/',(req,res) => {
+    res.send('Welcom to my API')
+})
+
 // Set Port server
 app.listen(3000,(err) => {
     if(err) console.log(err);
