@@ -13,10 +13,9 @@ module.exports.login = (req, res) => {
     const {email,password} = req.body
     var sql = "SELECT * FROM db_users WHERE email = ?";
     connection.query(sql,[email], function (err, user) {
-        if (err) { res.status(400).json({msg:err}); return; }
         if (user.length == 0) { res.status(404).json({msg:'Not Found User'}); return; }
         bcrypt.compare(password, user[0].password, (err, isLogin) => {
-            if(err) { res.status(400).json({msg:err}); return;}
+          
             if(isLogin) {
                 const token = jwt.sign({ email: user[0].email }, secret,{expiresIn: '1h'})
                 res.status(200).json({msg:"Login success",status:"ok", token,})
@@ -34,7 +33,6 @@ module.exports.register = (req, res) => {
     const {email,password} = req.body
     // encrypt password
     bcrypt.genSalt(5, function(err, salt) {
-        if(err) { res.status(400).json({msg:err}) }
         bcrypt.hash(password, salt, function(err, hash) {
             if(err) { res.status(400).json({msg:err}) }
             var sql = "INSERT INTO db_users (email, password) VALUES (?,?)";

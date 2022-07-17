@@ -23,8 +23,9 @@ connection.connect(function(err) {
     console.log("Database Connected!");
 });
 
-app.get('/hello',(req,res) => {
-    res.send('Welcom to my API')
+app.get('/:id',(req,res) => {
+    const id = req.params
+    res.send(`Hello: ${id}`)
 })
 
 app.get('/',(req,res) => {
